@@ -1,23 +1,152 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hridoy Malakar</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background-color: #f4f4f4; text-align: center; }
-        .container { max-width: 600px; margin: 30px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; }
-        p { margin-bottom: 20px; }
-        .btn { display: inline-block; padding: 10px 20px; background: #3498db; color: #fff; text-decoration: none; border-radius: 5px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ratri - Health Care Companion | Hridoy Malakar</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Hind Siliguri', 'Inter', sans-serif; }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Hridoy Malakar</h1>
-        <p>Registered Medical assistant</p>
-        <p>BM&DC Reg No - D 17979</p>
-        <a href="#" class="btn">01776107213</a>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <!-- হেডার ও নেভিগেশন -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl font-black text-teal-700">Ratri</span>
+          <span class="text-xs bg-teal-50 text-teal-700 font-semibold px-2 py-0.5 rounded-full border border-teal-200">Health Care Companion</span>
+        </div>
+        <p class="text-xs text-slate-500 font-medium">Hridoy Malakar • Reg. Medical Assistant (BMDC Reg: 17979)</p>
+      </div>
+      <a href="#appointment" class="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm">
+        সিরিয়াল নিন
+      </a>
     </div>
+  </header>
+
+  <!-- হিরো সেকশন -->
+  <section class="py-12 px-4 bg-gradient-to-b from-teal-50/60 to-slate-50 border-b border-slate-100 text-center">
+    <div class="max-w-2xl mx-auto">
+      <span class="inline-block px-3 py-1 bg-teal-100 text-teal-800 text-xs font-bold rounded-full mb-3">
+        BMDC Registered Healthcare Professional
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+        নির্ভরযোগ্য প্রাথমিক স্বাস্থ্যসেবা ও রোগী পরামর্শ
+      </h1>
+      <p class="text-sm sm:text-base text-slate-600 mt-3">
+        রোগীদের সহজ ও দ্রুত সিরিয়াল বুকিং এবং সঠিক প্রাথমিক স্বাস্থ্য দিকনির্দেশনার জন্য ডিজিটাল মাধ্যম।
+      </p>
+    </div>
+  </section>
+
+  <!-- ক্রেডেনশিয়াল ও পরিচিতি -->
+  <section class="py-8 max-w-4xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm text-center">
+      <div class="text-teal-600 font-bold text-lg">BMDC 17979</div>
+      <p class="text-xs text-slate-500 mt-1">সরকারি রেজিস্ট্রার্ড স্বাস্থ্যকর্মী</p>
+    </div>
+    <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm text-center">
+      <div class="text-teal-600 font-bold text-lg">সহজ সিরিয়াল</div>
+      <p class="text-xs text-slate-500 mt-1">চেম্বার বা বিকাশ পেমেন্ট সুবিধা</p>
+    </div>
+    <div class="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm text-center">
+      <div class="text-teal-600 font-bold text-lg">ক্লিনিক্যাল গাইডেন্স</div>
+      <p class="text-xs text-slate-500 mt-1">সঠিক পরামর্শ ও পর্যবেক্ষণ</p>
+    </div>
+  </section>
+
+  <!-- অ্যাপয়েন্টমেন্ট বুকিং ফর্ম -->
+  <section id="appointment" class="py-12 max-w-xl mx-auto px-4">
+    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm">
+      <h2 class="text-xl font-bold text-slate-900 text-center">সিরিয়াল বুকিং ফর্ম</h2>
+      <p class="text-xs text-slate-500 text-center mt-1 mb-6">নিচের ফর্মটি সঠিকভাবে পূরণ করুন</p>
+
+      <form onsubmit="handleSubmit(event)" class="space-y-4 text-left">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">রোগীর পুরো নাম</label>
+          <input type="text" required placeholder="নাম লিখুন" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">মোবাইল নম্বর</label>
+          <input type="tel" required placeholder="01XXXXXXXXX" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">তারিখ</label>
+            <input type="date" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">সময়</label>
+            <select class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500">
+              <option>সকাল ১০:০০ - ১০:৩০</option>
+              <option>সকাল ১১:০০ - ১১:৩০</option>
+              <option>বিকাল ০৫:০০ - ০৫:৩০</option>
+              <option>সন্ধ্যা ০৬:০০ - ০৬:৩০</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- পেমেন্ট অপশন নির্বাচন -->
+        <div class="pt-2">
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">পেমেন্ট মেথড</label>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 p-3 border rounded-xl cursor-pointer text-xs font-semibold bg-slate-50 hover:bg-slate-100">
+              <input type="radio" name="payment" value="chamber" checked onclick="togglePayment(false)">
+              চেম্বারে পরিশোধ
+            </label>
+            <label class="flex items-center gap-2 p-3 border rounded-xl cursor-pointer text-xs font-semibold bg-pink-50 hover:bg-pink-100 text-pink-900 border-pink-200">
+              <input type="radio" name="payment" value="bkash" onclick="togglePayment(true)">
+              বিকাশ (Send Money)
+            </label>
+          </div>
+        </div>
+
+        <!-- বিকাশ পেমেন্ট বক্স -->
+        <div id="bkashBox" class="hidden p-4 bg-pink-50 border border-pink-200 rounded-2xl space-y-3">
+          <p class="text-xs text-pink-950 font-medium">
+            বিকাশ থেকে <strong class="text-pink-700">017XXXXXXXX</strong> নম্বরে ফি <strong>Send Money</strong> করুন। এরপর নিচের ঘরে তথ্য দিন:
+          </p>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="tel" id="bkashNumber" placeholder="আপনার বিকাশ নম্বর" class="w-full px-3 py-2 text-xs rounded-lg border border-pink-200 focus:outline-none">
+            <input type="text" id="trxId" placeholder="Transaction ID (TrxID)" class="w-full px-3 py-2 text-xs rounded-lg border border-pink-200 focus:outline-none uppercase">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 bg-teal-700 hover:bg-teal-800 text-white font-bold rounded-xl text-sm transition shadow">
+          বুকিং নিশ্চিত করুন
+        </button>
+      </form>
+
+      <!-- কনফার্মেশন মেসেজ -->
+      <div id="successMsg" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl text-center font-semibold">
+        আপনার সিরিয়াল রিকোয়েস্ট সফলভাবে জমা হয়েছে! দ্রুত আপনার ফোনে কনফার্মেশন জানিয়ে দেওয়া হবে।
+      </div>
+    </div>
+  </section>
+
+  <!-- স্ক্রিপ্ট লজিক -->
+  <script>
+    function togglePayment(isBkash) {
+      const box = document.getElementById('bkashBox');
+      if (isBkash) {
+        box.classList.remove('hidden');
+      } else {
+        box.classList.add('hidden');
+      }
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('successMsg').classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
