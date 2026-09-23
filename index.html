@@ -243,12 +243,12 @@
       }
 
       try {
-        const url = `https://api.telegram.org/bot${8753871022:AAE2FuEkjQ0GCYGGNq_ll3oapEqYzOYYYYA}/sendMessage`;
+        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
         await fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            chat_id: 5714049057,
+            chat_id: TELEGRAM_CHAT_ID,
             text: text,
             parse_mode: 'Markdown'
           })
