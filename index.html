@@ -14,6 +14,11 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
 
+  <!-- লাইভ নোটিশ বার (গুগল শিট থেকে নিয়ন্ত্রিত) -->
+  <div id="noticeBanner" class="bg-teal-700 text-white text-xs py-2 px-4 text-center font-medium hidden">
+    <span id="sheetNotice">লোড হচ্ছে...</span>
+  </div>
+
   <!-- হেডার -->
   <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
     <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -22,7 +27,7 @@
           <span class="text-2xl font-black text-teal-700">Ratri</span>
           <span class="text-xs bg-teal-50 text-teal-700 font-semibold px-2 py-0.5 rounded-full border border-teal-200">Health Care Companion</span>
         </div>
-        <p class="text-xs text-slate-500 font-medium">Hridoy Malakar • Reg. Medical Assistant (BMDC Reg: 17979)</p>
+        <p class="text-xs text-slate-500 font-medium">Hridoy Malakar • Reg. Medical Assistant (BMDC: <span id="sheetBmdc">17979</span>)</p>
       </div>
       <div class="flex items-center gap-2">
         <a href="#guidelines" class="hidden sm:inline-block border border-teal-200 hover:bg-teal-50 text-teal-700 text-xs font-bold px-3 py-2 rounded-xl transition">
@@ -50,17 +55,17 @@
     </div>
   </section>
 
-  <!-- ৩টি কার্ড -->
+  <!-- ৩টি ইন্টারেক্টিভ কার্ড -->
   <section class="py-8 max-w-4xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
     <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm text-center">
-      <div class="text-teal-600 font-bold text-lg">BMDC 17979</div>
+      <div class="text-teal-600 font-bold text-lg">BMDC <span id="sheetBmdcCard">17979</span></div>
       <p class="text-xs text-slate-500 mt-1">রেজিস্ট্রার্ড মেডিকেল অ্যাসিস্ট্যান্ট</p>
       <span class="inline-block mt-2 text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">ভেরিফাইড</span>
     </div>
 
     <a href="#appointment" class="p-5 bg-white rounded-2xl border border-slate-200 shadow-sm text-center hover:border-teal-500 hover:shadow-md transition group block">
       <div class="text-teal-600 font-bold text-lg group-hover:text-teal-700">সহজ সিরিয়াল ➜</div>
-      <p class="text-xs text-slate-500 mt-1">সরাসরি বুকিং ও কনফার্মেশন</p>
+      <p class="text-xs text-slate-500 mt-1">ফি: <span id="sheetFee" class="font-bold text-teal-700">৫০০ টাকা</span></p>
       <span class="inline-block mt-2 text-[10px] bg-teal-50 text-teal-700 font-semibold px-2 py-0.5 rounded-full">বুকিং ফর্ম</span>
     </a>
 
@@ -71,55 +76,116 @@
     </a>
   </section>
 
-  <!-- ক্লিনিক্যাল গাইডেন্স -->
+  <!-- ক্লিনিক্যাল গাইডেন্স সেকশন -->
   <section id="guidelines" class="py-12 max-w-4xl mx-auto px-4">
     <div class="bg-white p-6 sm:p-8 rounded-3xl border border-teal-100 shadow-sm space-y-6">
       <div class="text-center max-w-lg mx-auto">
         <span class="text-xs font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">Clinical Resource Hub</span>
         <h2 class="text-2xl font-bold text-slate-900 mt-2">ব্যবহারিক ক্লিনিক্যাল গাইডলাইন</h2>
-        <p class="text-xs text-slate-500 mt-1">উপজেলা ও তৃণমূল পর্যায়ে দ্রুত সিদ্ধান্ত গ্রহণে প্র্যাকটিক্যাল গাইডেন্স</p>
+        <p class="text-xs text-slate-500 mt-1">কার্ডে ক্লিক করে বিস্তারিত প্রোটোকল ও ম্যানেজমেন্ট চার্ট দেখুন</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-          <div class="text-xs font-bold text-teal-700">প্রোটোকল ০১</div>
-          <h4 class="font-bold text-sm text-slate-800 mt-1">Pediatric Dehydration Assessment & ORS Plan</h4>
+        <div onclick="openProtocol(1)" class="p-5 rounded-2xl bg-teal-50/40 border border-teal-200 hover:border-teal-500 hover:shadow-md transition cursor-pointer group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-teal-700">প্রোটোকল ০১</span>
+            <span class="text-xs font-bold text-teal-600 group-hover:translate-x-1 transition">বিস্তারিত দেখুন ➜</span>
+          </div>
+          <h4 class="font-bold text-sm sm:text-base text-slate-800 mt-2">Pediatric Dehydration & ORS Protocol</h4>
           <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-            WHO ও DGHS নির্দেশিত ডিহাইড্রেশন গ্রেডিং (Plan A, B, C) এবং ফ্লুইড ম্যানেজমেন্ট চার্ট।
+            WHO ও DGHS নির্দেশিত ডিহাইড্রেশন গ্রেডিং (Plan A, B, C) এবং ওরাল রিহাইড্রেশন চার্ট।
           </p>
         </div>
 
-        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-          <div class="text-xs font-bold text-teal-700">প্রোটোকল ০২</div>
-          <h4 class="font-bold text-sm text-slate-800 mt-1">Acute Respiratory Infection (ARI) Triage</h4>
+        <div onclick="openProtocol(2)" class="p-5 rounded-2xl bg-teal-50/40 border border-teal-200 hover:border-teal-500 hover:shadow-md transition cursor-pointer group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-teal-700">প্রোটোকল ০২</span>
+            <span class="text-xs font-bold text-teal-600 group-hover:translate-x-1 transition">বিস্তারিত দেখুন ➜</span>
+          </div>
+          <h4 class="font-bold text-sm sm:text-base text-slate-800 mt-2">Acute Respiratory Infection (ARI) Triage</h4>
           <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-            দ্রুত শ্বাস-প্রশ্বাস (Fast Breathing) ও চেস্ট ইনড্রয়িং নির্ণয় পদ্ধতি এবং রেফারেল ক্রাইটেরিয়া।
+            দ্রুত শ্বাস-প্রশ্বাস (Fast Breathing) ও চেস্ট ইনড্রয়িং নির্ণয় এবং জরুরি রেফারেল প্রোটোকল।
           </p>
         </div>
       </div>
 
       <!-- ইন্টারঅ্যাক্টিভ কুইজ -->
-      <div class="mt-6 p-5 bg-teal-50/40 rounded-2xl border border-teal-200">
+      <div class="mt-6 p-6 bg-slate-50 rounded-2xl border border-slate-200">
         <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-bold text-teal-800">কেস স্টাডি (Active Recall)</span>
-          <span class="text-[11px] text-teal-600 font-semibold">কেস ০১</span>
+          <span class="text-xs font-bold text-teal-800 bg-teal-100 px-2.5 py-1 rounded-lg">ইন্টারঅ্যাক্টিভ কেস স্টাডি</span>
+          <span class="text-xs text-slate-500 font-semibold">Active Recall</span>
         </div>
-        <p class="text-xs sm:text-sm font-semibold text-slate-800">
-          প্রশ্ন: ১০ মাস বয়সী শিশু পাতলা পায়খানা নিয়ে এসেছে। চোখ বসে গেছে, পানি দিলে ব্যাকুল হয়ে খাচ্ছে। ডায়াগনোসিস কোনটি?
+        <p class="text-sm font-bold text-slate-800 mt-3">
+          কেস: ১০ মাস বয়সী শিশু পাতলা পায়খানা নিয়ে এসেছে। চোখ কিছুটা বসে গেছে, পানি দিলে ব্যাকুল হয়ে খাচ্ছে। ডায়াগনোসিস কোনটি?
         </p>
 
-        <div class="mt-3 space-y-2 text-xs">
-          <button onclick="checkQuiz(0)" class="w-full text-left p-2.5 rounded-xl border bg-white border-slate-200 hover:bg-slate-50">A) No Signs of Dehydration (Plan A)</button>
-          <button onclick="checkQuiz(1)" class="w-full text-left p-2.5 rounded-xl border bg-white border-slate-200 hover:bg-slate-50">B) Some Dehydration (Plan B)</button>
-          <button onclick="checkQuiz(2)" class="w-full text-left p-2.5 rounded-xl border bg-white border-slate-200 hover:bg-slate-50">C) Severe Dehydration (Plan C)</button>
+        <div class="mt-4 space-y-2.5 text-xs sm:text-sm">
+          <button id="qBtn0" onclick="handleQuiz(0)" class="w-full text-left p-3 rounded-xl border bg-white border-slate-200 hover:bg-slate-100 font-medium transition">
+            A) No Signs of Dehydration (Plan A)
+          </button>
+          <button id="qBtn1" onclick="handleQuiz(1)" class="w-full text-left p-3 rounded-xl border bg-white border-slate-200 hover:bg-slate-100 font-medium transition">
+            B) Some Dehydration (Plan B)
+          </button>
+          <button id="qBtn2" onclick="handleQuiz(2)" class="w-full text-left p-3 rounded-xl border bg-white border-slate-200 hover:bg-slate-100 font-medium transition">
+            C) Severe Dehydration (Plan C)
+          </button>
         </div>
 
-        <div id="quizResult" class="hidden mt-3 p-3 rounded-xl text-xs font-semibold"></div>
+        <div id="quizResult" class="hidden mt-4 p-4 rounded-xl text-xs sm:text-sm font-semibold leading-relaxed"></div>
       </div>
     </div>
   </section>
 
-  <!-- অ্যাপয়েন্টমেন্ট ফর্ম (সরাসরি সাইলেন্ট সাবমিট) -->
+  <!-- পপ-আপ মডাল -->
+  <div id="protocolModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 max-h-[85vh] overflow-y-auto shadow-2xl relative border border-slate-100">
+      <button onclick="closeProtocol()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">✕</button>
+
+      <div id="protoContent1" class="hidden space-y-4 text-left">
+        <span class="text-xs font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">WHO & DGHS Standard</span>
+        <h3 class="text-xl font-bold text-slate-900">Pediatric Dehydration Management Protocol</h3>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed pt-2">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <h5 class="font-bold text-slate-900 mb-1">১. ডিহাইড্রেশন গ্রেডিং:</h5>
+            <ul class="list-disc pl-4 space-y-1">
+              <li><strong>Plan A:</strong> সজাগ, স্বাভাবিক চোখ, স্বাভাবিক পিপাসা।</li>
+              <li><strong>Plan B:</strong> অস্থির/খিটখিটে, চোখ বসা, ব্যাকুলভাবে পানি খায়।</li>
+              <li><strong>Plan C:</strong> নিস্তেজ/অচেতন, স্কিন পিঞ্চ খুব ধীরে স্বাভাবিক হয় (>২ সেকেন্ড)।</li>
+            </ul>
+          </div>
+          <div class="p-3 bg-teal-50 rounded-xl border border-teal-200">
+            <h5 class="font-bold text-teal-900 mb-1">২. প্রাথমিক করণীয় (Plan B):</h5>
+            <p>প্রথম ৪ ঘণ্টায় ৭৫ মিলি/কেজি হারে ORS এবং জিংক সিরাপ (২০ মিগ্রা দৈনিক ১০-১৪ দিন) দিতে হবে।</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="protoContent2" class="hidden space-y-4 text-left">
+        <span class="text-xs font-bold text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">IMCI Protocol</span>
+        <h3 class="text-xl font-bold text-slate-900">Acute Respiratory Infection (ARI) Triage</h3>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-700 leading-relaxed pt-2">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <h5 class="font-bold text-slate-900 mb-1">১. দ্রুত শ্বাস-প্রশ্বাস (Fast Breathing) কাট-অফ:</h5>
+            <ul class="list-disc pl-4 space-y-1">
+              <li>২ মাসের কম: মিনিটে ৬০ বার বা বেশি</li>
+              <li>২-১১ মাস: মিনিটে ৫০ বার বা বেশি</li>
+              <li>১২ মাস-৫ বছর: মিনিটে ৪০ বার বা বেশি</li>
+            </ul>
+          </div>
+          <div class="p-3 bg-rose-50 rounded-xl border border-rose-200 text-rose-900">
+            <h5 class="font-bold text-rose-900 mb-1">২. বিপদের লক্ষণ ও রেফারেল:</h5>
+            <p>বুকের খাঁচা ডেবে যাওয়া বা স্ট্রাইডোর থাকলে তাৎক্ষণিক অক্সিজেন ও প্রথম ডোজ অ্যান্টিবায়োটিক দিয়ে রেফার করুন।</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 text-center">
+        <button onclick="closeProtocol()" class="px-6 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800">বন্ধ করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- অ্যাপয়েন্টমেন্ট ফর্ম -->
   <section id="appointment" class="py-12 max-w-xl mx-auto px-4">
     <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm">
       <div class="text-center mb-6">
@@ -146,10 +212,10 @@
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">সময় *</label>
             <select id="appointmentSlot" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500">
-              <option>সকাল ১০:০০ - ০১:০০</option>
-      
-              <option>বিকাল ০৩:০০ - ০৮:৩০</option>
-              
+              <option>সকাল ১০:০০ - ১০:৩০</option>
+              <option>সকাল ১১:০০ - ১১:৩০</option>
+              <option>বিকাল ০৫:০০ - ০৫:৩০</option>
+              <option>সন্ধ্যা ০৬:০০ - ০৬:৩০</option>
             </select>
           </div>
         </div>
@@ -172,7 +238,7 @@
         <!-- বিকাশ বক্স -->
         <div id="bkashBox" class="hidden p-4 bg-pink-50 border border-pink-200 rounded-2xl space-y-3">
           <p class="text-xs text-pink-950 font-medium">
-            বিকাশ থেকে <strong class="text-pink-700 font-bold">017XXXXXXXX</strong> নম্বরে ফি <strong>Send Money</strong> করুন। এরপর নিচের ঘরে তথ্য দিন:
+            বিকাশ থেকে <strong id="sheetBkash" class="text-pink-700 font-bold">017XXXXXXXX</strong> নম্বরে ফি <strong>Send Money</strong> করুন। এরপর নিচের ঘরে তথ্য দিন:
           </p>
           <div class="grid grid-cols-2 gap-2">
             <input type="tel" id="bkashSender" placeholder="প্রেরকের বিকাশ নম্বর" class="w-full px-3 py-2 text-xs rounded-lg border border-pink-200 focus:outline-none">
@@ -185,21 +251,58 @@
         </button>
       </form>
 
-      <!-- সাকসেস মেসেজ -->
       <div id="successCard" class="hidden mt-6 p-6 bg-teal-50 border border-teal-200 rounded-2xl text-center space-y-2">
         <div class="text-teal-700 font-bold text-base">✓ আপনার সিরিয়াল সফলভাবে সম্পন্ন হয়েছে!</div>
-        <p class="text-xs text-slate-600">
-          আপনার দেওয়া তথ্যাদি রেজিস্টারে লিপিবদ্ধ করা হয়েছে। চেম্বারে উপস্থিত হয়ে সিরিয়াল গ্রহণ করবেন।
-        </p>
+        <p class="text-xs text-slate-600">আপনার দেওয়া তথ্যাদি রেজিস্টারে লিপিবদ্ধ করা হয়েছে। চেম্বারে উপস্থিত হয়ে সিরিয়াল গ্রহণ করবেন।</p>
       </div>
     </div>
   </section>
 
   <!-- স্ক্রিপ্ট লজিক -->
   <script>
-    // ⚠️ এই দুটি মান আপনার বট এবং আইডি দিয়ে পরিবর্তন করুন:
+    // ⚠️ আপনার আগের টেলিগ্রাম ক্রেডেনশিয়াল:
     const TELEGRAM_BOT_TOKEN = "8753871022:AAE2FuEkjQ0GCYGGNq_ll3oapEqYzOYYYYA";
     const TELEGRAM_CHAT_ID = "5714049057";
+
+    // ⚠️ আপনার তৈরি করে দেওয়া গুগল শিট Publish to Web করার পর পাওয়া CSV লিঙ্কটি এখানে বসান:
+    const GOOGLE_SHEET_CSV_URL = "https://drive.google.com/file/d/18D3_1cVKJ412DNA94qYf9Ok6SO55h7fP/view?usp=drivesdk";
+
+    async function loadDataFromGoogleSheet() {
+      if (!GOOGLE_SHEET_CSV_URL || GOOGLE_SHEET_CSV_URL === "YOUR_GOOGLE_SHEET_CSV_URL") return;
+
+      try {
+        const response = await fetch(GOOGLE_SHEET_CSV_URL);
+        const dataText = await response.text();
+        const rows = dataText.split('\n');
+
+        rows.forEach(row => {
+          const cols = row.split(',');
+          if (cols.length >= 2) {
+            const key = cols[0].trim();
+            const value = cols[1].trim();
+
+            if (key === 'bkash_number') {
+              document.getElementById('sheetBkash').innerText = value;
+            }
+            if (key === 'chamber_fee') {
+              document.getElementById('sheetFee').innerText = value;
+            }
+            if (key === 'bmdc_no') {
+              document.getElementById('sheetBmdc').innerText = value;
+              document.getElementById('sheetBmdcCard').innerText = value;
+            }
+            if (key === 'notice_text' && value) {
+              document.getElementById('noticeBanner').classList.remove('hidden');
+              document.getElementById('sheetNotice').innerText = value;
+            }
+          }
+        });
+      } catch (err) {
+        console.log("গুগল শিট ডিফল্ট অবস্থায় আছে।");
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadDataFromGoogleSheet);
 
     let selectedPayment = 'chamber';
 
@@ -211,6 +314,42 @@
       } else {
         selectedPayment = 'chamber';
         box.classList.add('hidden');
+      }
+    }
+
+    function openProtocol(num) {
+      document.getElementById('protocolModal').classList.remove('hidden');
+      if (num === 1) {
+        document.getElementById('protoContent1').classList.remove('hidden');
+        document.getElementById('protoContent2').classList.add('hidden');
+      } else {
+        document.getElementById('protoContent2').classList.remove('hidden');
+        document.getElementById('protoContent1').classList.add('hidden');
+      }
+    }
+
+    function closeProtocol() {
+      document.getElementById('protocolModal').classList.add('hidden');
+    }
+
+    function handleQuiz(index) {
+      const res = document.getElementById('quizResult');
+      res.classList.remove('hidden');
+
+      document.getElementById('qBtn0').className = 'w-full text-left p-3 rounded-xl border bg-white border-slate-200 font-medium text-xs sm:text-sm';
+      document.getElementById('qBtn1').className = 'w-full text-left p-3 rounded-xl border bg-white border-slate-200 font-medium text-xs sm:text-sm';
+      document.getElementById('qBtn2').className = 'w-full text-left p-3 rounded-xl border bg-white border-slate-200 font-medium text-xs sm:text-sm';
+
+      if (index === 1) {
+        document.getElementById('qBtn1').className = 'w-full text-left p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm';
+        res.className = 'mt-4 p-4 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-50 text-emerald-900 border border-emerald-200';
+        res.innerHTML = '✓ চমৎকার! সঠিক উত্তর (B)। শিশুর চোখ বসা এবং আগ্রহ নিয়ে পানি পান করা Some Dehydration (Plan B)-এর ক্লাসিক লক্ষণ। প্রথম ৪ ঘণ্টায় ওরাল রিহাইড্রেশন থেরাপি শুরু করাই মূল চিকিৎসা।';
+      } else {
+        const clickedBtn = document.getElementById(`qBtn${index}`);
+        clickedBtn.className = 'w-full text-left p-3 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-bold text-xs sm:text-sm';
+        document.getElementById('qBtn1').className = 'w-full text-left p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm';
+        res.className = 'mt-4 p-4 rounded-xl text-xs sm:text-sm font-semibold bg-rose-50 text-rose-900 border border-rose-200';
+        res.innerHTML = '✗ উত্তরটি সঠিক নয়। তীব্র তৃষ্ণায় ব্যাকুল হয়ে পানি পান করা Some Dehydration নির্দেশ করে। সঠিক উত্তর হলো B (Plan B)।';
       }
     }
 
@@ -228,51 +367,42 @@
       const bkashSender = document.getElementById('bkashSender').value.trim();
       const trxId = document.getElementById('trxId').value.trim();
 
-      let text = `🏥 *নতুন অ্যাপয়েন্টমেন্ট (Ratri Platform)*\n\n`;
-      text += `👤 *রোগীর নাম:* ${name}\n`;
-      text += `📞 *মোবাইল:* ${phone}\n`;
-      text += `📅 *তারিখ:* ${date}\n`;
-      text += `⏰ *সময়:* ${slot}\n`;
+      let text = `🏥 নতুন অ্যাপয়েন্টমেন্ট (Ratri)\n\n`;
+      text += `👤 রোগীর নাম: ${name}\n`;
+      text += `📞 মোবাইল: ${phone}\n`;
+      text += `📅 তারিখ: ${date}\n`;
+      text += `⏰ সময়: ${slot}\n`;
 
       if (selectedPayment === 'bkash') {
-        text += `💳 *পেমেন্ট:* বিকাশ (Send Money)\n`;
-        text += `📱 *বিকাশ নম্বর:* ${bkashSender || 'দেওয়া হয়নি'}\n`;
-        text += `🧾 *TrxID:* ${trxId || 'দেওয়া হয়নি'}\n`;
+        text += `💳 পেমেন্ট: বিকাশ (Send Money)\n`;
+        text += `📱 প্রেরক নম্বর: ${bkashSender || 'দেওয়া হয়নি'}\n`;
+        text += `🧾 TrxID: ${trxId || 'দেওয়া হয়নি'}\n`;
       } else {
-        text += `🏥 *পেমেন্ট:* চেম্বারে পরিশোধ\n`;
+        text += `🏥 পেমেন্ট: চেম্বারে পরিশোধ\n`;
       }
 
       try {
         const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-        await fetch(url, {
+        const response = await fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: text,
-            parse_mode: 'Markdown'
-          })
+          body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: text })
         });
 
-        // ফর্ম হাইড করে সুন্দর সাকসেস মেসেজ দেখানো
-        document.getElementById('bookingForm').classList.add('hidden');
-        document.getElementById('successCard').classList.remove('hidden');
+        const result = await response.json();
+
+        if (result.ok) {
+          document.getElementById('bookingForm').classList.add('hidden');
+          document.getElementById('successCard').classList.remove('hidden');
+        } else {
+          alert(`টেলিগ্রাম এরর: ${result.description}`);
+          btn.disabled = false;
+          btn.innerText = 'সিরিয়াল নিশ্চিত করুন';
+        }
       } catch (error) {
-        alert('কোথাও একটু সমস্যা হয়েছে, অনুগ্রহ করে সরাসরি যোগাযোগ করুন।');
+        alert('নেটওয়ার্ক সমস্যার কারণে পাঠানো যায়নি।');
         btn.disabled = false;
         btn.innerText = 'সিরিয়াল নিশ্চিত করুন';
-      }
-    }
-
-    function checkQuiz(index) {
-      const res = document.getElementById('quizResult');
-      res.classList.remove('hidden');
-      if (index === 1) {
-        res.className = 'mt-3 p-3 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200';
-        res.innerHTML = '✓ সঠিক উত্তর! চোখ বসে যাওয়া এবং আগ্রহ নিয়ে পানি খাওয়া হলো Some Dehydration (Plan B)-এর লক্ষণ।';
-      } else {
-        res.className = 'mt-3 p-3 rounded-xl text-xs font-semibold bg-rose-50 text-rose-800 border border-rose-200';
-        res.innerHTML = '✗ উত্তরটি সঠিক নয়। তীব্র পিপাসায় আগ্রহ নিয়ে পানি পান করা Some Dehydration নির্দেশ করে। সঠিক উত্তর হলো B।';
       }
     }
   </script>
